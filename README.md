@@ -47,7 +47,7 @@ web3.eth._requestManager.provider.addresses[0]
 ```
 
 ## Migration
-Make sure you have specified a .env file according to .env.example provided.
+Make sure you have specified a .env file according to [.env.example](https://github.com/ClassicDelta/Smart-Contracts/blob/master/.env.example) provided.
 Then run the following command:
 ```bash
 truffle migrate --reset --network mainnet
