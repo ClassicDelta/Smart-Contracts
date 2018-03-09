@@ -5,12 +5,11 @@ var ClassicDelta = artifacts.require("ClassicDelta");
 //    with `git checkout HEAD -- migrations/2_deploy_contracts.js`)
 
 module.exports = function (deployer) {
-  const ownerAccount = "0x2cB00324a6B9Eb1756770beF05Dc83FE2D375090";
-  const admin = ownerAccount;
-  const feeAccount = ownerAccount;
-  const accountLevelsAddr = ownerAccount;
+  const admin = "0x2cB00324a6B9Eb1756770beF05Dc83FE2D375090";
+  const feeAccount = "0xd1900dA6020324e24327c7B5b16526f201929fE3";
+  const accountLevelsAddr = 0x0000000000000000000000000000000000000000;
   const feeMake = 0;
-  const feeTake = 0;
+  const feeTake = 3000000000000000;
   const feeRebate = 0;
 
   deployer.deploy(ClassicDelta, admin, feeAccount, accountLevelsAddr, feeMake, feeTake, feeRebate);

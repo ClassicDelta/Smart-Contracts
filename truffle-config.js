@@ -31,14 +31,10 @@ module.exports = {
     mainnet: {
       provider: provider('eth-api'),
       network_id: 3, // eslint-disable-line camelcase
-      gas: 5000000,
-      gasPrice: 1000000000,
     },
     ropsten: {
       provider: ropstenProvider,
       network_id: 3, // eslint-disable-line camelcase
-      gas: 10000000000000000000000,
-      gasPrice: 100000000000000,
     },
     coverage: {
       host: 'localhost',
