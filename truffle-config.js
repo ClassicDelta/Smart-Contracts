@@ -31,7 +31,7 @@ module.exports = {
     mainnet: {
       provider: provider('eth-api'),
       network_id: 3, // eslint-disable-line camelcase
-      gas: 4300000,
+      gas: 5000000,
       gasPrice: 1000000000,
     },
     ropsten: {
@@ -57,5 +57,11 @@ module.exports = {
       port: 7545,
       network_id: '*', // eslint-disable-line camelcase
     },
+  },
+  solc: {
+    optimizer: {
+      enabled: true,
+      runs: 200
+    }
   },
 };
