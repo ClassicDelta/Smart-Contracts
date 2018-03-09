@@ -47,6 +47,19 @@ web3.eth._requestManager.provider.addresses[0]
 ```
 
 ## Migration
+
+### To test network
+Migrating the code to Ganache test network can be done only after starting ganache-CLI by:
+```bash
+npm run ganache
+```
+
+Migration command to just started ganache network:
+```bash
+truffle migrate --reset --network ganache
+```
+
+### To main network - costs involved
 Make sure you have specified a .env file according to [.env.example](https://github.com/ClassicDelta/Smart-Contracts/blob/master/.env.example) provided.
 Then run the following command:
 ```bash
