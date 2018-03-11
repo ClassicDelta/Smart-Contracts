@@ -28,9 +28,9 @@ module.exports = {
       port: 8545,
       network_id: '*', // eslint-disable-line camelcase
     },
-    mainnet: {
+    live: {
       provider: provider('eth-api'),
-      network_id: 3, // eslint-disable-line camelcase
+      network_id: 1,
     },
     ropsten: {
       provider: ropstenProvider,
