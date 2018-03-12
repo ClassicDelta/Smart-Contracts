@@ -33,7 +33,7 @@ truffle test --network ganache
 
 ### Console
 ```bash
-truffle console --network mainnet
+truffle console --network live
 ```
 
 #### Test network
@@ -63,5 +63,5 @@ truffle migrate --reset --network ganache
 Make sure you have specified a .env file according to [.env.example](https://github.com/ClassicDelta/Smart-Contracts/blob/master/.env.example) provided.
 Then run the following command:
 ```bash
-truffle migrate --reset --network mainnet
+truffle migrate --reset --network live
 ```
