@@ -11,6 +11,8 @@ contract('ClassicDelta', accounts => {
     const feeTake = 3000000000000000;
     const feeRebate = 0;
 
+    console.log("Estimated gas for contract is: " + web3.eth.estimateGas({data: ClassicDelta.bytecode}));
+
     beforeEach(async function () {
         classicDelta = await ClassicDelta.new(admin, feeAccount, accountLevelsAddr, feeMake, feeTake, feeRebate, { from: creator });
     });
