@@ -12,11 +12,6 @@ const infuraProvider = network => providerWithMnemonic(
   `https://${network}.infura.io/${process.env.INFURA_API_KEY}`
 );
 
-const provider = apiToUse => providerWithMnemonic(
-  process.env.MNEMONIC || '',
-  process.env.MAINNET_ENDPOINT+`${apiToUse}`
-);
-
 const ropstenProvider = process.env.SOLIDITY_COVERAGE
   ? undefined
   : infuraProvider('ropsten');
@@ -29,7 +24,7 @@ module.exports = {
       network_id: '*', // eslint-disable-line camelcase
     },
     live: {
-      provider: provider('eth-api'),
+      provider: infuraProvider('mainnet'),
       network_id: 1,
     },
     ropsten: {
