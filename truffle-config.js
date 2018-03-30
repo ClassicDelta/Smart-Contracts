@@ -2,10 +2,10 @@ require('dotenv').config();
 require('babel-register');
 require('babel-polyfill');
 
-const HDWalletProvider = require('truffle-safe-hdwallet-provider');
+const HDWalletProvider = require('truffle-hdwallet-provider');
 
 const providerWithMnemonic = (mnemonic, rpcEndpoint) =>
-  new HDWalletProvider(mnemonic, rpcEndpoint, 0, 1, process.env.PASSWORD);
+  new HDWalletProvider(mnemonic, rpcEndpoint, 0, 1); //, process.env.PASSWORD);
 
 const infuraProvider = network => providerWithMnemonic(
   process.env.MNEMONIC || '',
@@ -18,18 +18,28 @@ const ropstenProvider = process.env.SOLIDITY_COVERAGE
 
 module.exports = {
   networks: {
+    customMainnet: {
+      provider: providerWithMnemonic(process.env.MNEMONIC, process.env.CUSTOM_ENDPOINT + process.env.ENDPOINT_POSFIX),
+      network_id: 1, // eslint-disable-line camelcase
+      gas: 4605201,
+      gasPrice: 10000000000,
+    },
     development: {
       host: 'localhost',
       port: 9545,
       network_id: '*', // eslint-disable-line camelcase
     },
-    live: {
+    infuraMainnet: {
       provider: infuraProvider('mainnet'),
-      network_id: 1,
+      network_id: 1, // eslint-disable-line camelcase
+      gas: 4605201,
+      gasPrice: 10000000000,
     },
     ropsten: {
       provider: ropstenProvider,
       network_id: 3, // eslint-disable-line camelcase
+      gas: 4605201,
+      gasPrice: 10000000000,
     },
     coverage: {
       host: 'localhost',
@@ -52,7 +62,7 @@ module.exports = {
   solc: {
     optimizer: {
       enabled: true,
-      runs: 200
-    }
+      runs: 200,
+    },
   },
 };
