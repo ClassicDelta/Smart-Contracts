@@ -19,7 +19,7 @@ const ropstenProvider = process.env.SOLIDITY_COVERAGE
 module.exports = {
   networks: {
     customMainnet: {
-      provider: providerWithMnemonic(process.env.MNEMONIC, process.env.CUSTOM_ENDPOINT + process.env.ENDPOINT_POSFIX),
+      provider: providerWithMnemonic(process.env.MNEMONIC, process.env.ENDPOINT + process.env.ENDPOINT_POSFIX),
       network_id: 1, // eslint-disable-line camelcase
       gas: 4605201,
       gasPrice: 10000000000,
