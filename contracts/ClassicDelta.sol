@@ -26,6 +26,11 @@ contract ClassicDelta is Ownable {
   event Deposit(address token, address user, uint amount, uint balance);
   event Withdraw(address token, address user, uint amount, uint balance);
 
+  modifier onlyToken (address token) {
+    require( token != 0);
+    _;
+  }
+
   function ClassicDelta(
     address feeAccount_,
     address accountLevelsAddr_,
@@ -99,15 +104,13 @@ contract ClassicDelta is Ownable {
     commonWithdraw(0, amount);
   }
 
-  function depositToken(address token, uint amount) public {
+  function depositToken(address token, uint amount) public onlyToken(token) {
     //remember to call Token(address).approve(this, amount) or this contract will not be able to do the transfer on your behalf.
-    require(token!=0);
     require (ERC20(token).transferFrom(msg.sender, this, amount));
     commonDeposit(token, amount);
   }
 
-  function withdrawToken(address token, uint amount) public {
-    require(token!=0);
+  function withdrawToken(address token, uint amount) public onlyToken(token) {
     commonWithdraw(token, amount);
   }
 
