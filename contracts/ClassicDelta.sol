@@ -67,48 +67,48 @@ contract ClassicDelta is Ownable {
     feeRebate = feeRebate_;
   }
 
-  function commonDeposit(address token, address sender, uint value) internal{
-    tokens[token][sender] = tokens[token][sender] + value;
+  function commonDeposit(address token, uint value) internal {
+    tokens[token][msg.sender] = tokens[token][msg.sender] + value;
     emit Deposit(
     token,
-    sender,
+    msg.sender,
     value,
-    tokens[token][sender]);
+    tokens[token][msg.sender]);
   }
 
   function deposit() public payable {
-    commonDeposit(0, msg.sender, msg.value);
+    commonDeposit(0, msg.value);
+  }
+
+  function commonWithdraw(address token, uint amount) internal {
+    require (tokens[token][msg.sender] >= amount);
+    tokens[token][msg.sender] = tokens[token][msg.sender] - amount;
+    require((token != 0)?
+      ERC20(token).transfer(msg.sender, amount):
+      // solium-disable-next-line security/no-call-value
+      msg.sender.call.value(amount)()
+    );
+    emit Withdraw(
+    token,
+    msg.sender,
+    amount,
+    tokens[token][msg.sender]);
   }
 
   function withdraw(uint amount) public {
-    require (tokens[0][msg.sender] >= amount);
-    tokens[0][msg.sender] = tokens[0][msg.sender] - amount;
-    // solium-disable-next-line security/no-call-value
-    require(msg.sender.call.value(amount)());
-    emit Withdraw(
-      0,
-      msg.sender,
-      amount,
-      tokens[0][msg.sender]);
+    commonWithdraw(0, amount);
   }
 
   function depositToken(address token, uint amount) public {
     //remember to call Token(address).approve(this, amount) or this contract will not be able to do the transfer on your behalf.
     require(token!=0);
     require (ERC20(token).transferFrom(msg.sender, this, amount));
-    commonDeposit(token, msg.sender, amount);
+    commonDeposit(token, amount);
   }
 
   function withdrawToken(address token, uint amount) public {
     require(token!=0);
-    require(tokens[token][msg.sender] >= amount);
-    tokens[token][msg.sender] = tokens[token][msg.sender] - amount;
-    require (ERC20(token).transfer(msg.sender, amount));
-    emit Withdraw (
-      token,
-      msg.sender,
-      amount,
-      tokens[token][msg.sender]);
+    commonWithdraw(token, amount);
   }
 
   function balanceOf(address token, address user) public constant returns (uint) {
