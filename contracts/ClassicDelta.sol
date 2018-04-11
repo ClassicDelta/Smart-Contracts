@@ -67,13 +67,17 @@ contract ClassicDelta is Ownable {
     feeRebate = feeRebate_;
   }
 
-  function deposit() public payable {
-    tokens[0][msg.sender] = tokens[0][msg.sender] + msg.value;
+  function commonDeposit(address token, address sender, uint value) internal{
+    tokens[token][sender] = tokens[token][sender] + value;
     emit Deposit(
-      0,
-      msg.sender,
-      msg.value,
-      tokens[0][msg.sender]);
+    token,
+    sender,
+    value,
+    tokens[token][sender]);
+  }
+
+  function deposit() public payable {
+    commonDeposit(0, msg.sender, msg.value);
   }
 
   function withdraw(uint amount) public {
@@ -92,12 +96,7 @@ contract ClassicDelta is Ownable {
     //remember to call Token(address).approve(this, amount) or this contract will not be able to do the transfer on your behalf.
     require(token!=0);
     require (ERC20(token).transferFrom(msg.sender, this, amount));
-    tokens[token][msg.sender] = tokens[token][msg.sender] + amount;
-    emit Deposit(
-      token,
-      msg.sender,
-      amount,
-      tokens[token][msg.sender]);
+    commonDeposit(token, msg.sender, amount);
   }
 
   function withdrawToken(address token, uint amount) public {
