@@ -123,7 +123,7 @@ contract('ClassicDelta', accounts => {
   });
 
 
-  // it('Test trade token', async function () {
+  // it('Test create order', async function () {
   //   let user = accounts[4];
   //   let tokenGet = 0;
   //   let tokenGive = fixedTokenAddress;
@@ -131,16 +131,19 @@ contract('ClassicDelta', accounts => {
   //   let amountGive = 20000;
   //   let expires = 0;
   //   let nonce = 0;
-  //   let v = "Hello World";
-  //   let r = "Hello World";
-  //   let s = "Hello World";
-  //   let firstAmount = 400;
-  //   let secondAmount = 400;
+  //   // let v = "Hello World";
+  //   // let r = "Hello World";
+  //   // let s = "Hello World";
+  //   // let firstAmount = 400;
+  //   // let secondAmount = 400;
 
   //   await classicDelta.order(tokenGet, amountGet, tokenGive, amountGive, expires, nonce, {from: user});
-  //   await classicDelta.trade(tokenGet, amountGet, tokenGive, amountGive, expires, nonce,
-  //   user, v, r, s,  firstAmount, {from: user});
-  //   var 
+  //   var tokens = classicDelta.tokens();
+  //   console.log(tokens);
+  //   var hash = web3.sha3(str(tokenGet) + )
+  //   // await classicDelta.trade(tokenGet, amountGet, tokenGive, amountGive, expires, nonce,
+  //   // user, v, r, s,  firstAmount, {from: user});
+  //   // var 
 
   // });
 });
